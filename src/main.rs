@@ -12,8 +12,11 @@ const DIGITS : [[&str; 11]; 7] = [
     ["┃ ┃ ","  ┃  "," ┃   ", "   ┃ ","   ┃ ","   ┃ "," ┃ ┃ ","   ┃ "," ┃ ┃ ","   ┃ "," ╹ "],
     ["┗━┛ ","  ╹  "," ┗━━ ", " ┗━┛ ","   ╹ "," ┗━┛ "," ┗━┛ ","   ╹ "," ┗━┛ "," ┗━┛ ","   "],
 ];
+// Rust string allows unicode character
 
 fn main() {
+    //hide the cursor in terminal
+    print!("\x1b[?25l");
     loop {
         let t = Local::now();
         let time = t.format("%H:%M:%S").to_string();
@@ -22,7 +25,7 @@ fn main() {
                // now that we have chars of time, we want to match the pattern
                let col = match c {
                 '0'..='9' => c as usize - '0' as usize, //this will give an integer
-                ':' => 10,
+                ':' => 10, // try putting 11 here, let it panic a bit
                  _ => 10,
                };
 
@@ -30,6 +33,8 @@ fn main() {
             }
             println!();
         }
-        std::thread::sleep(time::Duration::from_millis(999))
+        std::thread::sleep(time::Duration::from_millis(999));
+        //move the cursor up 7 characters
+        print!("\x1b[7A");
     }
 }

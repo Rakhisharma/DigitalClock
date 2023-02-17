@@ -1,3 +1,4 @@
+use std::time;
 use chrono::{Local};
 
 // https://www.w3.org/TR/xml-entity-names/025.html
@@ -12,8 +13,10 @@ const DIGITS : [[&str; 11]; 7] = [
 ];
 
 fn main() {
-    let t = Local::now();
-    let time = t.format("%H:%M:%S").to_string();
-    
-    println!("{:?}", t);
+    loop {
+        let t = Local::now();
+        let time = t.format("%H:%M:%S").to_string();
+        println!("{:?}", time);
+        std::thread::sleep(time::Duration::from_millis(999))
+    }
 }

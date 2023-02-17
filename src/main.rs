@@ -1,3 +1,5 @@
+use chrono::{Local};
+
 // https://www.w3.org/TR/xml-entity-names/025.html
 const DIGITS : [[&str; 11]; 7] = [
     ["┏━┓ ","  ╻  "," ┏━┓ ", " ┏━┓ "," ╻ ╻ "," ┏━┓ "," ┏   "," ┏━┓ "," ┏━┓ "," ┏━┓ ","   "],
@@ -10,5 +12,8 @@ const DIGITS : [[&str; 11]; 7] = [
 ];
 
 fn main() {
-    println!("Hello, world!");
+    let t = Local::now();
+    let time = t.format("%H:%M:%S").to_string();
+    
+    println!("{:?}", t);
 }
